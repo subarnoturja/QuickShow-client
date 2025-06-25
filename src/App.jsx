@@ -7,6 +7,7 @@ import SeatLayout from "./pages/SeatLayout"
 import MyBookings from "./pages/MyBookings"
 import Favorite from "./pages/Favorite"
 import Footer from "./components/Footer"
+import { Toaster } from "react-hot-toast"
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <>
+      <Toaster />
       {!isAdminRoute && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -23,7 +25,7 @@ function App() {
         <Route path="/my-bookings" element={<MyBookings />} />
         <Route path="/favorite" element={<Favorite />} />
       </Routes>
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </>
   )
 }
