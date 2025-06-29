@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { assets } from '../assets/assets';
 import Loading from '../components/Loading';
 import { ArrowRightIcon, ClockIcon } from 'lucide-react';
@@ -17,8 +17,6 @@ const SeatLayout = () => {
   const [selectedTime, setSelectedTime] = useState(null)
   const [show, setShow] = useState(null);
   const [occupiedSeats, setOccupiedSeats] = useState([])
-
-  const navigate = useNavigate();
 
   const { axios, user, getToken } = useAppContext();
 
@@ -67,8 +65,8 @@ const SeatLayout = () => {
           const seatId = `${row}${i + 1}`;
           return (
             <button key={seatId} onClick={() => handleSeatClick(seatId)} className={`h-8 w-8 rounded border border-primary/60 cursor-pointer
-             ${selectedSeats.includes(seatId) && "bg-primary text-white"} 
-             ${occupiedSeats.includes(seatId) && "opacity-50"}`}>
+             ${selectedSeats.includes(seatId) && "bg-green-500 text-white"} 
+             ${occupiedSeats.includes(seatId) && "bg-gray-600"}`}>
               {seatId}
             </button>
           )
@@ -84,8 +82,7 @@ const SeatLayout = () => {
 
           const { data } = await axios.post('/api/booking/create', { showId: selectedTime.showId, selectedSeats}, {headers: { Authorization: `Bearer ${await getToken()}`}})
           if(data.success){
-            toast.success(data.message)
-            navigate('/my-bookings')
+            window.location.href = data.sessionUrl;
           }
           else {
             toast.error(data.message)
