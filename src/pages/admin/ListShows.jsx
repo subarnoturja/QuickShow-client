@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { dummyShowsData } from '../../assets/assets';
 import Loading from '../../components/Loading';
 import Title from '../../components/admin/Title';
 import { dateFormate } from '../../lib/dateFormate';
@@ -27,7 +26,7 @@ const ListShows = () => {
     if(user){
       getAllShows();
     }
-  }, []);
+  }, [user]);
 
   return !loading ? (
     <>
