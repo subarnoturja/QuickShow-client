@@ -43,7 +43,6 @@ npm run dev
 # or
 yarn dev
 ``` 
-The application will be available at http://localhost:3000
 
 **Production Build**
 ``` bash
